@@ -34,6 +34,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+shift+Return exec gnome-terminal
+
 #bindsym $mod+Return exec urxvt -e tmux-session
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -206,11 +208,14 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 
 ### Software
+## {{{
 
 # Firefox
-bindsym $shift+f exec firefox
+#bindsym $shift+f exec firefox
+#bindsym XF86HomePage exec FireFox
 #assign [class="Firefox"] $ws1
-for_window [class="Firefox" instance="Toplevel"] border 1pixel
+for_window [class="Firefox"] border 2pixel
+for_window [class="Firefox" instance="Toplevel"] border 2pixel
 for_window [class="Firefox" title="About Mozilla Firefox"] floating enable
 bindsym XF86HomePage exec firefox
 
@@ -220,15 +225,15 @@ assign [class="Thunar"] $ws3
 
 # Intellij IDEA
 bindsym $mod+shift+i exec "$HOME/.config/i3/app/intellij.sh"
-assign [class="jetbrains-idea"] $ws8
+bindsym $mod+shift+a exec "$HOME/.config/i3/app/clion.sh"
 bindsym $mod+shift+a exec "$HOME/.config/i3/app/studio.sh"
-assign [class="jetbrains-studio"] $ws9
+bindsym $mod+shift+h exec "$Home/.config/i3/app/phpstorm.sh"
+#assign [class="jetbrains-studio"] $ws9
 assign [class="com-intellij-updater-Runner"] $ws9
-bindsym $shift+a exec "$HOME/.config/i3/app/clion.sh"
+assign [class="jetbrains-idea"] $ws8
 assign [class="jetbrains-clion"] $ws9
+assign [class="jetbrains-phpstorm"] $ws9
 assign [class="com-intellij-updater-Runner"] $ws9
-
-# eamview
 
 # vcl
 assign [class="Vlc"] $ws4
@@ -243,35 +248,49 @@ assign [class="Wps"] $ws5
 assign [class="Et"] $ws5
 assign [class="Wpp"] $ws5
 
+# Virtualbox
+assign [class="^VirtualBox$"] $ws10
 
 # Teamviewer
 bindsym $mod+shift+t exec teamviewer
-assign [class="TeamViewer"] $ws10
 
-
-# program launcher
+# program launcher - rofi
 bindsym $mod+F1 exec rofi -show window
 bindsym $mod+F2 exec rofi -show run
 
 # WallPaper
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/WallPaper/wallpaper7.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/WallPaper/wallpaper44.jpg
 
 # Print
 bindsym Print exec gnome-screenshot --interactive
 
-bindsym XF86KbdBrightnessUp exec dkeyboardled up
-bindsym XF86KbdBrightnessDown exec dkeyboardled down
+# Sensors
+bindsym $ctrl+g exec gnome-system-monitor
 
-# fn-{5,6}
-bindsym XF86MonBrightnessUp exec dbrightness up
-bindsym XF86MonBrightnessDown exec dbrightness down
+## }}}
 
-# fn-9
-bindsym XF86TouchpadToggle exec touchpad-script auto
+#bindsym XF86MonBrightnessUp exec dbrightness up
+#bindsym XF86MonBrightnessDown exec dbrightness down
 
-# fn-{10,11,12}
+### Touchpab
+## {{{
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+
+# Touch volum
 bindsym XF86AudioMute exec amixer set Master toggle && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioRaiseVolume exec amixer set Master on && amixer set Master 5%+ && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec amixer set Master on && amixer set Master 5%- && pkill -RTMIN+10 i3blocks
+
+## }}}
 
 exec source $HOME/.config/autostartrc

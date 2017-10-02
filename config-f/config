@@ -211,7 +211,7 @@ bindsym $mod+r mode "resize"
 ## {{{
 
 # Firefox
-#bindsym $shift+f exec firefox
+bindsym $shift+f exec firefox
 #bindsym XF86HomePage exec FireFox
 #assign [class="Firefox"] $ws1
 for_window [class="Firefox"] border 2pixel
@@ -220,23 +220,23 @@ for_window [class="Firefox" title="About Mozilla Firefox"] floating enable
 bindsym XF86HomePage exec firefox
 
 # Thunar
-bindsym $shift+d exec thunar
-assign [class="Thunar"] $ws3
+bindsym $shift+d exec nautilus
+assign [class="Nautilus"] $ws3
 
 # Intellij IDEA
 bindsym $mod+shift+i exec "$HOME/.config/i3/app/intellij.sh"
-bindsym $mod+shift+a exec "$HOME/.config/i3/app/clion.sh"
-bindsym $mod+shift+a exec "$HOME/.config/i3/app/studio.sh"
-bindsym $mod+shift+h exec "$Home/.config/i3/app/phpstorm.sh"
+bindsym $mod+shift+p exec "$HOME/.config/i3/app/pycharm.sh"
+#bindsym $mod+shift+a exec "$HOME/.config/i3/app/studio.sh"
+#bindsym $mod+shift+h exec "$Home/.config/i3/app/phpstorm.sh"
 #assign [class="jetbrains-studio"] $ws9
 assign [class="com-intellij-updater-Runner"] $ws9
 assign [class="jetbrains-idea"] $ws8
-assign [class="jetbrains-clion"] $ws9
+assign [class="jetbrains-pycharm"] $ws9
 assign [class="jetbrains-phpstorm"] $ws9
 assign [class="com-intellij-updater-Runner"] $ws9
 
 # vcl
-assign [class="Vlc"] $ws4
+assign [class="Vlc"] $ws6
 
 # Gedit
 bindsym $mod+shift+g exec gedit
@@ -249,17 +249,22 @@ assign [class="Et"] $ws5
 assign [class="Wpp"] $ws5
 
 # Virtualbox
+bindsym $mod+shift+v exec virtualbox
 assign [class="^VirtualBox$"] $ws10
 
 # Teamviewer
 bindsym $mod+shift+t exec teamviewer
+
+# Rambox
+bindsym $mod+shift+a exec rambox
+assign [class="Rambox"] $ws6
 
 # program launcher - rofi
 bindsym $mod+F1 exec rofi -show window
 bindsym $mod+F2 exec rofi -show run
 
 # WallPaper
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/WallPaper/wallpaper44.jpg
+#exec_always --no-startup-id feh --bg-scale $HOME/Pictures/WallPaper/wallpaper44.jpg
 
 # Print
 bindsym Print exec gnome-screenshot --interactive
@@ -267,6 +272,9 @@ bindsym Print exec gnome-screenshot --interactive
 # Sensors
 bindsym $ctrl+g exec gnome-system-monitor
 
+# lock screen
+#bindsym $mod+F3 exec xautolock -locknow
+bindsym $mod+3 exec --no-startup-id xautolock -time 5  -locker "systemctl suspend"
 ## }}}
 
 #bindsym XF86MonBrightnessUp exec dbrightness up
@@ -284,7 +292,6 @@ bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
 
 # Touch volum
 bindsym XF86AudioMute exec amixer set Master toggle && pkill -RTMIN+10 i3blocks
